@@ -2,18 +2,19 @@ const btn = document.querySelector(".btn");
 let allDivs = document.querySelectorAll(".add");
 
 // get random coordinates for adding div
-const getCoordinates = (divSize) => {
+const getCoordinates = (divSize, divSizePx) => {
   // we get values from 0 -100 as our screen width and heigh between 0% and 100%
   let width = Math.floor(Math.random() * 100);
   // to avoit overflow
   if (width + divSize >= 100) {
-    width = 100 - divSize;
+    width = 100 - divSize - 1;
   }
   let height = Math.floor(Math.random() * 100);
   // to avoid averflow
-  if (height + divSize >= 100) {
-    height = 100 - divSize;
+  if (height + divSizePx >= 100) {
+    height = 100 - divSizePx - 1;
   }
+  console.log({ width, height, divSize, divSizePx });
   return { width, height };
 };
 
@@ -44,14 +45,17 @@ const drowSquare = () => {
     (parseInt(window.innerWidth) * parseInt(`${divSize}%`)) / 100;
   div.style.width = `${windowWidth}px`;
   div.style.height = `${windowWidth}px`;
-
+  // get % value from window height
+  const windowHeight = parseInt(window.innerHeight);
+  const percentage = (windowWidth / windowHeight) * 100;
+  console.log(percentage);
   //  get random color and apply to div as background color
   div.style.background = `rgba(${randomInteger()},${randomInteger()},${randomInteger()})`;
 
   // get random coordinates and apply to div
-  const { width, height } = getCoordinates(divSize);
-  div.style.top = `${width}%`;
-  div.style.left = `${height}%`;
+  const { width, height } = getCoordinates(divSize, percentage);
+  div.style.top = `${height}%`;
+  div.style.left = `${width}%`;
 
   // add div to window
   window.document.body.appendChild(div);
