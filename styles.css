@@ -1,0 +1,17 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+.btn {
+    height: 50px;
+    width: 100px;
+    background: blue;
+    color: white;
+    font-size:1rem;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px ;
+}
